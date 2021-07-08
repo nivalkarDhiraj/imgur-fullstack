@@ -1,0 +1,49 @@
+.signin{
+    display: grid;
+    place-items: center;
+    height:94vh;
+    background-color: #141518;
+}
+
+.signin__card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signin__image{
+    max-width: 200px;
+    align-items: center;
+    padding: 20px;
+}
+
+.signin__card > input{
+    padding : 10px;
+    margin: 5px;
+    min-width: 300px;
+    max-width: 500px;
+    border-radius: 8px;
+    background-color: #2C2F34;
+    color: white;
+    border-style:solid;
+}
+
+.signin__card > button{
+    padding : 10px;
+    margin: 20px;
+    min-width: 200px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #646FFF;
+    transition: background-color 0.2s;
+    transition: border 0.2s;
+    border-radius: 12px;
+    border-style:solid;
+    border:2px solid rgb(44, 44, 48);
+}
+
+.signin__card > button:hover{
+    background-color: #4c54be;
+    border:2px solid black;
+}

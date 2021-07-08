@@ -1,0 +1,24 @@
+.profile__header {
+	display: flex;
+    align-items: center;
+    padding: 0px 30px;
+    
+    border-bottom: 1px solid;
+    background-color: #1E184D;
+}
+
+.profile__image {
+    object-fit: contain;
+	width: 160px;
+	height: 160px;
+	border-radius: 80px;
+    margin: 20px;
+    border: 2px solid white;
+    margin-left: auto;
+}
+
+.profile__name {
+    margin-left: 30px;
+    color: white;
+    flex:0.8
+}
