@@ -28,10 +28,25 @@ mongoose.connection.on("error", (error) => {
 	console.log("Error connecting database..."), error;
 });
 
+
+//cors
+const whitelist = ['http://localhost:4000', 'http://localhost:8080', 'https://imgur-be.herokuapp.com']
+const corsOptions = {
+  origin: function (origin, callback) {
+    console.log("** Origin of request " + origin)
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      console.log("Origin acceptable")
+      callback(null, true)
+    } else {
+      console.log("Origin rejected")
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
 app.use(morgan("dev"));
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
 
 //routes
 
@@ -55,6 +70,16 @@ app.use((error, req, res, next) => {
 		},
 	});
 });
+
+
+if (process.env.NODE_ENV === 'production') {
+	// Serve any static files
+	app.use(express.static(path.join(__dirname, 'client/build')));
+  // Handle React routing, return all requests to React app
+	app.get('*', function(req, res) {
+	  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+	});
+  }
 
 app.listen(PORT, () => {
 	console.log(`http://localhost:${PORT}`);
