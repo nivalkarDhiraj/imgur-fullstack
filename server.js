@@ -10,8 +10,8 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 const mongodbURI = `mongodb+srv://admin:${process.env.MONGO_ATLAS_PW}@cluster0.nswef.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
-const postRoutes = require("./api/routes/post");
-const userRoutes = require("./api/routes/auth");
+// const postRoutes = require("./api/routes/posts");
+// const userRoutes = require("./api/routes/user");
 
 // mongoose
 
@@ -50,7 +50,6 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 //routes
-console.log("Environment", process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'production') {
 	// Serve any static files
 	app.use(express.static(path.join(__dirname, 'client/build')));
@@ -60,10 +59,10 @@ if (process.env.NODE_ENV === 'production') {
 	});
   }
 
-// app.use(require("./api/routes/auth")); //update later
-// app.use(require("./api/routes/post"));
-app.use("/post", postRoutes);
-app.use("/user", userRoutes);
+app.use(require("./api/routes/auth")); //update later
+app.use(require("./api/routes/post"));
+// app.use("/posts", postRoutes);
+// app.use("/user", userRoutes);
 app.get("/", (req, res) => res.send("Hello World!!!"));
 
 app.use((req, res, next) => {
