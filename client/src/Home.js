@@ -7,12 +7,14 @@ function Home() {
 		fetch("/allposts", {
 			headers: {
 				Authorization: "Bearer " + localStorage.getItem("jwt_token"),
+				"Content-Type": "application/json",
+				"Accept": "application/json",
 			},
 		})
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);
-                
+
 				setData(data);
 			});
 	}, []);
@@ -20,7 +22,15 @@ function Home() {
 	return (
 		<div className="home">
 			{data.map((post) => {
-				return <Posts key={post._id} imageSrc={post.image_url} title={post.title} postID = {post._id} postedBy = {post.postedBy._id}/>;
+				return (
+					<Posts
+						key={post._id}
+						imageSrc={post.image_url}
+						title={post.title}
+						postID={post._id}
+						postedBy={post.postedBy._id}
+					/>
+				);
 			})}
 		</div>
 	);
